@@ -11,8 +11,21 @@ Alternative image editing directly in WordPress. Replaces the original image edi
 
 == Description ==
 Alternative image editing directly in WordPress.
-Features: Resize, Rotate, Crop, Brightness, Contrast, Undo and Grayscale.
-Easy user interface. Possible to resize and crop by drag and drop.
+
+Features:
+
+* Resize (drag and drop)
+* Rotate
+* Crop (drag and drop)
+* Brightness
+* Contrast
+* Undo
+* Grayscale
+* Easy user interface
+
+Checkout the [live demo](http://www.phpimageeditor.se/wordpress.php).
+
+Note: If you're interested in this version, you may also like the pro version.
 
 == Installation ==
 Unzip the zip file to /yoursite/wp-content/plugins/php-image-editor-lite
