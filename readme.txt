@@ -10,7 +10,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Alternative image editing directly in WordPress. Replaces the original image editor.
 
 == Description ==
-Alternative image editing directly in WordPress.
+Alternative image editing directly in WordPress. Replaces the original image editor.
 
 Features:
 
