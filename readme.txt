@@ -2,7 +2,7 @@
 Contributors: patrikhultgren-1
 Tags: image,editing,editor,picture,resize,contrast,brightness
 Tested up to: 3.3.2
-Stable tag: 0.6
+Stable tag: 0.7
 Requires at least: 3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -25,7 +25,7 @@ Features:
 
 Checkout the [live demo](http://www.phpimageeditor.se/wordpress.php).
 
-Note: If you're interested in this version, you may also like the pro version.
+Note: If you're interested in the lite version, you may also like the pro version.
 
 == Installation ==
 Unzip the zip file to /yoursite/wp-content/plugins/php-image-editor-lite
@@ -42,6 +42,9 @@ Important! CHMOD 777 ain't secure. You could try CHMOD 755. Read more at: http:/
 4. How it looks like when handling brightness, contrast and grayscale.
 
 == Changelog ==
+
+= 0.7 =
+* Just changed the readme file.
 
 = 0.6 =
 * Changed directory names.
