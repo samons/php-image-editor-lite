@@ -63,7 +63,7 @@
 		{
 			if (version_compare(phpversion(), PIE_PHP_VERSION_MINIMUM, "<"))
 			{
-				$this->errorMessages[] = phpversion()." ".__('is too old php version. Minimum is:', 'phpimageeditorlite')." ".PIE_PHP_VERSION_MINIMUM;
+				$this->errorMessages[] = phpversion()." ".__('is too old php version. Minimum is:', 'php-image-editor-lite')." ".PIE_PHP_VERSION_MINIMUM;
 				return;
 			}
 			
@@ -78,7 +78,7 @@
 				
 			if ($srcEdit == "")
 			{
-				$this->errorMessages[] = __('No image has been provided.', 'phpimageeditorlite');
+				$this->errorMessages[] = __('No image has been provided.', 'php-image-editor-lite');
 				return;
 			}
 			
@@ -95,7 +95,7 @@
 			
 			if (!file_exists($this->srcEdit))
 			{
-				$this->errorMessages[] = __('The image doesn´t exist.', 'phpimageeditorlite');
+				$this->errorMessages[] = __('The image doesn´t exist.', 'php-image-editor-lite');
 				return;
 			}
 			
@@ -103,7 +103,7 @@
 			
 			if (!$info)
 			{
-				$this->errorMessages[] = __('Image must be of type jpeg, png or gif.', 'phpimageeditorlite');
+				$this->errorMessages[] = __('Image must be of type jpeg, png or gif.', 'php-image-editor-lite');
 				return;
 			}
 			
@@ -122,7 +122,7 @@
 			}
 			else
 			{
-				$this->errorMessages[] = __('Image must be of type jpeg, png or gif.', 'phpimageeditorlite');
+				$this->errorMessages[] = __('Image must be of type jpeg, png or gif.', 'php-image-editor-lite');
 				return;
 			}
 			
@@ -546,7 +546,7 @@
 					update_post_meta($post_meta->post_id, '_wp_attachment_metadata', $post_meta->metadata);	
 				}
 				else {
-					$this->errorMessages[] = __('Couldn´t find image information. Maybe it´s been deleted during image editing?', 'phpimageeditorlite');
+					$this->errorMessages[] = __('Couldn´t find image information. Maybe it´s been deleted during image editing?', 'php-image-editor-lite');
 					return;
 				}
 

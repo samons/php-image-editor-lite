@@ -5,8 +5,8 @@ Plugin URI: http://www.phpimageeditor.se/wordpress.php
 Description: Alternative image editing directly in WordPress.
 Author: Patrik Hultgren
 Author URI: http://www.phpimageeditor.se
-Version: 0.5
-Stable tag: 0.5
+Version: 0.6
+Stable tag: 0.6
 License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 */
 
@@ -37,7 +37,7 @@ define('PIE_USER_CAPABILITY', 'upload_files');
  		wp_enqueue_script('jquery');
 	    wp_enqueue_script('thickbox',null,array('jquery'));
 	    wp_enqueue_style('thickbox.css', '/'.WPINC.'/js/thickbox/thickbox.css', null, '1.0');
-	    wp_enqueue_script('phpimageeditorlite-script', plugins_url().'/phpimageeditorlite/editimage.js', array('jquery', 'thickbox'));
+	    wp_enqueue_script('php-image-editor-lite-script', plugins_url().'/php-image-editor-lite/editimage.js', array('jquery', 'thickbox'));
 	    
 		$params = array(
 		  'host' => site_url(),
@@ -46,7 +46,7 @@ define('PIE_USER_CAPABILITY', 'upload_files');
 		  'version' => PIE_VERSION
 		);    
 	
-	 	wp_localize_script('phpimageeditorlite-script', 'PieParams', $params);
+	 	wp_localize_script('php-image-editor-lite-script', 'PieParams', $params);
  	}
 }
 

@@ -2,7 +2,7 @@
 Contributors: patrikhultgren-1
 Tags: image,editing,editor,picture,resize,contrast,brightness
 Tested up to: 3.3.2
-Stable tag: 0.5
+Stable tag: 0.6
 Requires at least: 3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -15,8 +15,8 @@ Features: Resize, Rotate, Crop, Brightness, Contrast, Undo and Grayscale.
 Easy user interface. Possible to resize and crop by drag and drop.
 
 == Installation ==
-Unzip the zip file to /yoursite/wp-content/plugins/phpimageeditorlite
-Set the directories /yoursite/wp-content/plugins/phpimageeditorlite/editimagesoriginal/, /yoursite/wp-content/plugins/phpimageeditorlite/editimagespng/ and /yoursite/wp-content/plugins/phpimageeditorlite/editimagesworkwith/ to read, write, and execute permissions.
+Unzip the zip file to /yoursite/wp-content/plugins/php-image-editor-lite
+Set the directories /yoursite/wp-content/plugins/php-image-editor-lite/editimagesoriginal/, /yoursite/wp-content/plugins/php-image-editor-lite/editimagespng/ and /yoursite/wp-content/plugins/php-image-editor-lite/editimagesworkwith/ to read, write, and execute permissions.
 If you already haven´t done it, set your own image directory, subdirectories to read, write, and execute permissions. For example /yoursite/wp-content/uploads/
 
 Important! CHMOD 777 ain't secure. You could try CHMOD 755. Read more at: http://codex.wordpress.org/Changing_File_Permissions
@@ -29,6 +29,9 @@ Important! CHMOD 777 ain't secure. You could try CHMOD 755. Read more at: http:/
 4. How it looks like when handling brightness, contrast and grayscale.
 
 == Changelog ==
+
+= 0.6 =
+* Changed directory names.
 
 = 0.5 =
 * Initial release.
