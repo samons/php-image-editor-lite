@@ -28,9 +28,11 @@ Checkout the [live demo](http://www.phpimageeditor.se/wordpress.php).
 Note: If you're interested in the lite version, you may also like the pro version.
 
 == Installation ==
-Unzip the zip file to /yoursite/wp-content/plugins/php-image-editor-lite
-Set the directories /yoursite/wp-content/plugins/php-image-editor-lite/editimagesoriginal/, /yoursite/wp-content/plugins/php-image-editor-lite/editimagespng/ and /yoursite/wp-content/plugins/php-image-editor-lite/editimagesworkwith/ to read, write, and execute permissions.
-If you already haven´t done it, set your own image directory, subdirectories to read, write, and execute permissions. For example /yoursite/wp-content/uploads/
+1. Unzip the zip file to /yoursite/wp-content/plugins/php-image-editor-lite
+
+2. Set the directories /yoursite/wp-content/plugins/php-image-editor-lite/editimagesoriginal/, /yoursite/wp-content/plugins/php-image-editor-lite/editimagespng/ and /yoursite/wp-content/plugins/php-image-editor-lite/editimagesworkwith/ to read, write, and execute permissions.
+
+3. If you already haven´t done it, set your own image directory, subdirectories to read, write, and execute permissions. For example /yoursite/wp-content/uploads/
 
 Important! CHMOD 777 ain't secure. You could try CHMOD 755. Read more at: http://codex.wordpress.org/Changing_File_Permissions
 
