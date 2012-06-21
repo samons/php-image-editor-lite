@@ -28,7 +28,7 @@ Checkout the [live demo](http://www.phpimageeditor.se/wordpress.php).
 Note: If you're interested in the lite version, you may also like the pro version.
 
 == Installation ==
-1. Unzip the zip file to /yoursite/wp-content/plugins/php-image-editor-lite
+1. Unzip the zip file to /yoursite/wp-content/plugins/
 
 2. Set the directories /yoursite/wp-content/plugins/php-image-editor-lite/editimagesoriginal/, /yoursite/wp-content/plugins/php-image-editor-lite/editimagespng/ and /yoursite/wp-content/plugins/php-image-editor-lite/editimagesworkwith/ to read, write, and execute permissions.
 
