@@ -75,13 +75,14 @@ jQuery(document).ready(function($) {
 
 	var editElement = $("[id*='imgedit-open-btn-']");
 
-	var filepath = editElement.parent().parent().parent().parent().parent().find("input.urlfield").val();
-	filepath = filepath.replace(PieParams.host+"/", "");
+	if (editElement.length) 
+	{
+		var filepath = editElement.parent().parent().parent().parent().parent().find("input.urlfield").val();
+		filepath = filepath.replace(PieParams.host+"/", "");
+		
+		var finalUrl = PieParams.host + '/?pie-lite=1&imagesrc='+urlEncode(filepath)+'&language='+urlEncode(PieParams.language)+'&version='+urlEncode(PieParams.version)+'&systemversion='+urlEncode(PieParams.wordpressversion)+'&system=wordpress';
 	
-	editElement.replaceWith('<a id="pie-edit-image" target="_blank" href="">'+editElement.val()+'</a>');
-	
-	var finalUrl = PieParams.host + '/?pie-lite=1&imagesrc='+urlEncode(filepath)+'&language='+urlEncode(PieParams.language)+'&version='+urlEncode(PieParams.version)+'&systemversion='+urlEncode(PieParams.wordpressversion)+'&system=wordpress';
-    	
-	$("#pie-edit-image").attr('href', finalUrl);
+		editElement.replaceWith('<a target="_blank" href="'+finalUrl+'">'+editElement.val()+'</a>');
+	}
  
 });
