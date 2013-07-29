@@ -45,6 +45,9 @@ Important! CHMOD 777 ain't secure. You could try CHMOD 755. Read more at: http:/
 
 == Changelog ==
 
+= 4.0 =
+* Made image editing reponsive and added fields for doing cropping.
+
 = 0.7 =
 * Just changed the readme file.
 

@@ -1,7 +1,5 @@
 jQuery(document).ready(function($) {
 	
-	var a1; var a2; var a3; var a4; var a5;
-	
 	function urlDecode(str) {
 	    // Decodes URL-encoded string  
 	    // 
@@ -75,58 +73,15 @@ jQuery(document).ready(function($) {
 	    return ret;
 	}
 
-	$("[id*='imgedit-open-btn-']").removeAttr('onclick');
+	var editElement = $("[id*='imgedit-open-btn-']");
+
+	var filepath = editElement.parent().parent().parent().parent().parent().find("input.urlfield").val();
+	filepath = filepath.replace(PieParams.host+"/", "");
 	
-    $("[id*='imgedit-open-btn-']").click(function() {
+	editElement.replaceWith('<a id="pie-edit-image" target="_blank" href="">'+editElement.val()+'</a>');
+	
+	var finalUrl = PieParams.host + '/?pie-lite=1&imagesrc='+urlEncode(filepath)+'&language='+urlEncode(PieParams.language)+'&version='+urlEncode(PieParams.version)+'&systemversion='+urlEncode(PieParams.wordpressversion)+'&system=wordpress';
     	
-    	var filepath = $(this).parent().parent().parent().parent().parent().find("input.urlfield").val();
-    	filepath = filepath.replace(PieParams.host+"/", "");
-    	var d=new Date();
-    	
-    	if (isIframe()) {
-	    	
-    		a1 = $('#TB_window', window.parent.document).width();
-	    	a2 = $('#TB_window', window.parent.document).height();
-	    	a3 = $('#TB_window', window.parent.document).css('margin-left');
-	    	a4 = $('#TB_iframeContent', window.parent.document).width();
-	    	a5 = $('#TB_iframeContent', window.parent.document).height();
-
-	    	var b1 = $(window.parent.document).width()-60;
-	    	var b2 = $(window.parent.document).height()-60;
-	    	var b3 = "-"+parseInt(($(window.parent.document).width()-60)/2)+"px";
-	    	var b4 = $(window.parent.document).width()-60;
-	    	var b5 = $(window.parent.document).height()-60;
-	    	
-			setParentLightbox(b1, b2, b3, b4, b5);
-    	}
-		
-		var finalUrl = PieParams.host + '/?pie-lite=1&imagesrc='+urlEncode(filepath)+'&language='+urlEncode(PieParams.language)+'&version='+urlEncode(PieParams.version)+'&systemversion='+urlEncode(PieParams.wordpressversion)+'&system=wordpress';
-    	tb_show("",finalUrl+"&TB_iframe=true&height="+($(window).height()-80)+"&width="+($(window).width()-80));
-
-		if (isIframe()) {
-			
-			$("#TB_closeWindowButton").click(function()
-	        {
-				setParentLightbox(a1, a2, a3, a4, a5);
-	        });	
-
-			$("#TB_overlay").click(function()
-	        {
-				setParentLightbox(a1, a2, a3, a4, a5);
-	        });	
-		}
-    });	
-    
-    function isIframe() {
-    	return (window.parent.location != window.location);
-    }
-   
-    function setParentLightbox(a1, a2, a3, a4, a5) {
-    	$('#TB_window', window.parent.document).width(a1);
-    	$('#TB_window', window.parent.document).height(a2);
-    	$('#TB_window', window.parent.document).css('margin-left', a3);
-    	$('#TB_iframeContent', window.parent.document).width(a4);
-    	$('#TB_iframeContent', window.parent.document).height(a5);
-    }
-    
+	$("#pie-edit-image").attr('href', finalUrl);
+ 
 });

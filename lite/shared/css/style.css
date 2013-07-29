@@ -23,27 +23,6 @@ label.checkbox
 	display: inline;
 }
 
-div.field
-{
-	clear: both;
-	padding: 17px;
-}
-
-div.col-1,
-div.col-2
-{
-	float: left;
-}
-
-div.col-1
-{
-	margin-right: 10px;
-}
-
-input.checkbox
-{
-}
-
 input.input-number
 {
 	width: 70px;
@@ -57,8 +36,14 @@ input.input-number
 	background-color: #eaeaea;
 	border-top: 1px solid white;
 	border-bottom: 1px solid #d6d6d6;
-	padding: 0 10px 0 10px;
-	padding: 12px 10px 12px 10px;
+	float: left;
+	clear: both;
+	width: 100%;
+}
+
+.main-actions .inner
+{
+  padding: 12px 10px 12px 10px;
 }
 
 #editimage
@@ -67,6 +52,8 @@ input.input-number
 	position: relative;
 	top: 0px;
 	left: 0px;
+	float: left;
+	clear: both;
 }
 
 div.error,
@@ -75,7 +62,8 @@ div.info
 {
 	background-color: #ffc1c1;
 	padding: 5px;
-	margin: 0 10px 10px 10px;
+  float: left;
+  width: 100%;
 }
 
 div.buy-info
@@ -110,6 +98,9 @@ div#actionContainer
 	background-color: #e1f3ff;
 	background-image: url('../images/tab_body.png');
 	background-repeat: repeat-x;
+	float: left;
+	clear: both;
+	width: 100%;
 }
 
 div#menu
@@ -160,17 +151,14 @@ div#menu
 	-moz-opacity:0;
 	opacity:0;
 	display: none;                                                 
+  float: left;
+  clear: both;
+  width: 100%;
 }
 
 .tabs
 {
-	margin: 10px;
-}
-
-.widthAndHeight
-{
-	height: 23px; 
-	overflow: hidden;
+	margin: 0;
 }
 
 #image
@@ -186,13 +174,8 @@ div#menu
 	background-color: #c7e7fc;
 	padding: 15px;
 	font-weight: bold;
-}
-
-#loading_bar
-{
-	margin-top: 3px;
-	background-color: #3d7ab0;
-	height: 3px;
+	float: left;
+	width: 100%;
 }
 
 #imageResizerKeepProportions,
@@ -215,34 +198,226 @@ div#menu
 	border: 1px solid #d8d8d8;
 }
 
-.help-header
+.help .header
 {
 	font-weight: bold;
 	text-transform: uppercase;
 }
 
-.help-content
-{
-}
-
-#texthelp
-{
-	margin-top: 58px;
-}
-
-.crop-settings
-{
-	background-color: #cde3f2;
-}
-
-.crop-top
-{
-	border-bottom: 1px solid #a8c6da;
-	padding-bottom: 8px;
-	margin-bottom: 8px;
-}
-
 #actions
 {
 	display: none;
+}
+
+#menu-as-select-container 
+{
+  display: none;
+}
+
+/** RESIZE **/
+#panel_0
+{
+  margin-bottom: 20px;
+}
+
+#panel_0 .field,
+#panel_0 .help 
+{
+  float: left;
+}
+
+#panel_0 .help 
+{
+  margin-top: 20px;
+  margin-left: 20px;  
+}
+
+#panel_0 .fields .field.width,
+#panel_0 .fields .field.height 
+{
+  float: left;
+  clear: none;
+}
+
+#panel_0 .fields .field.width 
+{
+  margin-right: 20px;
+  margin-bottom: 5px;
+}
+
+#panel_0 .fields .field.keepproportions 
+{
+  padding-top: 0;
+  clear: both;
+}
+
+#panel_0 .fields 
+{
+  float: left;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+/** ROTATE **/
+#panel_1 .fields,
+#panel_1 .field 
+{
+  float: left;
+}
+
+#panel_1 .fields 
+{
+  margin: 20px;
+}
+
+#panel_1 #btnRotateLeft 
+{
+  margin-right: 10px;
+}
+
+/** CROP **/
+#panel_2 .field,
+#panel_2 .help,
+#panel_2 .fields
+{
+  float: left;
+}
+
+#panel_2 .fields .field.cropx 
+{
+  clear: left;
+  margin-bottom: 5px;
+}
+
+#panel_2 .fields .field.cropx input 
+{
+  margin-right: 30px;
+}
+
+#panel_2 .fields .field.cropwidth 
+{
+  margin-bottom: 5px;
+}
+
+#panel_2 .fields .field.cropwidth input 
+{
+  margin-right: 30px;
+}
+
+#panel_2 .fields .field.crop-settings 
+{
+  clear: both; 
+  margin-bottom: 10px;
+}
+
+#panel_2 .help
+{
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+#panel_2 .field
+{
+  padding: 0;
+}
+
+#panel_2 .fields
+{
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+/** EFFECTS **/
+#panel_3 .field,
+#panel_3 .help,
+#panel_3 .fields
+{
+  float: left;
+}
+
+#panel_3 .field
+{
+  clear: both;
+  width: 100%;
+}
+
+#panel_3 .field.brightness,
+#panel_3 .field.contrast
+{
+  margin-bottom: 25px;
+}
+
+#panel_3 .fields
+{
+  width: 401px;
+  margin: 20px;
+}
+
+/** SMARTPHONES **/
+@media screen and (max-width: 480px)
+{
+  #menu-as-select-container 
+  {
+    background-color: #497cae;
+    margin-bottom: 1px;
+    display: block;
+    padding: 5px;
+  }
+  div#menu,
+  .help
+  {
+    display: none;
+  }
+	div#actionContainer
+	{
+	  padding-top: 5px;
+    padding-bottom: 5px;
+	  
+	}
+	#editimage 
+	{
+	  margin: 0;
+	}	
+	.main-actions .inner
+	{
+    padding: 5px;
+	}
+	input[type=button] 
+	{
+	    font-size:80%;
+	}	
+	/** RESIZE **/
+	#panel_0
+	{
+	  margin-bottom: 5px;
+	}
+	#panel_0 .fields 
+	{
+	  margin-left: 5px;
+	  margin-top: 5px;
+	}
+  /** ROTATE **/
+  #panel_1 .fields 
+  {
+      margin: 5px;
+  }
+  /** CROP **/
+	#panel_2 .fields
+	{
+	  margin-left: 5px;
+	  margin-top: 5px;
+	}
+	#panel_2 .fields .field.crop-settings {
+	  margin-bottom: 5px;
+	}
+	/** EFFECTS **/
+	#panel_3 .fields
+	{
+	  width: 205px;
+	  margin: 5px;
+	}
+  #panel_3 .ui-slider-horizontal 
+  { 
+    width: 100%;
+  }
 }

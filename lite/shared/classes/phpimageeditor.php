@@ -1,11 +1,35 @@
 <?php
+    
+	
+	    /*
+	    Copyright 2008, 2009, 2010, 2011 Patrik Hultgren
+	    
+	    YOUR PROJECT MUST ALSO BE OPEN SOURCE IN ORDER TO USE THIS VERSION OF PHP IMAGE EDITOR.
+	    BUT YOU CAN USE PHP IMAGE EDITOR JOOMLA PRO IF YOUR CODE NOT IS OPEN SOURCE.
+	    
+	    This file is part of PHP Image Editor Joomla.
+	
+	    PHP Image Editor Joomla is free software: you can redistribute it and/or modify
+	    it under the terms of the GNU General Public License as published by
+	    the Free Software Foundation, either version 3 of the License, or
+	    (at your option) any later version.
+	
+	    PHP Image Editor Joomla is distributed in the hope that it will be useful,
+	    but WITHOUT ANY WARRANTY; without even the implied warranty of
+	    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	    GNU General Public License for more details.
+	
+	    You should have received a copy of the GNU General Public License
+	    along with PHP Image Editor Joomla. If not, see <http://www.gnu.org/licenses/>.
+	    */
+
 	/**
 	* Protection
 	*
 	* This string of code will prevent hacks from accessing the file directly.
 	*/
 	defined('ABSPATH') or die("Cannot access pages directly.");
-
+	
 	class PHPImageEditor 
 	{
 		var $srcEdit = "";
@@ -36,7 +60,8 @@
 		var $inputCropBottom = 0;
 		var $inputKeepProportions = true;
 		var $inputCropKeepProportions = false;
-		var $inputCropKeepProportionsRatio = 1;
+    var $inputCropKeepProportionsRatioW = 1;
+    var $inputCropKeepProportionsRatioH = 1;
 		var $inputPanel = PIE_START_PANEL;
 		var $inputLanguage = PIE_DEFAULT_LANGUAGE;
 		var $inputContrast = 0;
@@ -45,6 +70,7 @@
 		var $inputBrightnessLast = 0;
 		var $inputGrayscale = false;
 		var	$httpImageKey = "imagesrc";
+		var	$texts = array();
 		var $actions = "";
 		var $isPostBack = false;
 		var $isAjaxPost = false;
@@ -61,9 +87,11 @@
 		
 		function PHPImageEditor()
 		{
+			$this->LoadLanguage();
+			
 			if (version_compare(phpversion(), PIE_PHP_VERSION_MINIMUM, "<"))
 			{
-				$this->errorMessages[] = phpversion()." ".__('is too old php version. Minimum is:', 'php-image-editor-lite')." ".PIE_PHP_VERSION_MINIMUM;
+				$this->errorMessages[] = phpversion()." ".$this->texts["OLD PHP VERSION"]." ".PIE_PHP_VERSION_MINIMUM;
 				return;
 			}
 			
@@ -78,7 +106,7 @@
 				
 			if ($srcEdit == "")
 			{
-				$this->errorMessages[] = __('No image has been provided.', 'php-image-editor-lite');
+				$this->errorMessages[] = $this->texts["NO PROVIDED IMAGE"];
 				return;
 			}
 			
@@ -87,15 +115,21 @@
 			if (isset($_POST["userid"]))
 				$this->userId = $_POST["userid"];
 			else
+			{
 				$this->userId = "_".time()."_".str_replace(".", "_", $_SERVER['REMOTE_ADDR']);
-			
+        
+				//In my Virtual box in Windows Vista I'll get :: as ip.
+				//Remove it to avoid errors.
+				$this->userId = str_replace("_::", "", $this->userId);
+			}
+				
 			$this->SetSrcOriginal();
 			$this->SetSrcPng();
 			$this->SetSrcWorkWith();
 			
 			if (!file_exists($this->srcEdit))
 			{
-				$this->errorMessages[] = __('The image doesn´t exist.', 'php-image-editor-lite');
+				$this->errorMessages[] = $this->texts["IMAGE DOES NOT EXIST"];
 				return;
 			}
 			
@@ -103,7 +137,7 @@
 			
 			if (!$info)
 			{
-				$this->errorMessages[] = __('Image must be of type jpeg, png or gif.', 'php-image-editor-lite');
+				$this->errorMessages[] = $this->texts["INVALID IMAGE TYPE"];
 				return;
 			}
 			
@@ -122,7 +156,7 @@
 			}
 			else
 			{
-				$this->errorMessages[] = __('Image must be of type jpeg, png or gif.', 'php-image-editor-lite');
+				$this->errorMessages[] = $this->texts["INVALID IMAGE TYPE"];
 				return;
 			}
 			
@@ -147,7 +181,8 @@
 				$this->inputLanguage = strip_tags($_POST["language"]); 
 				$this->inputKeepProportions = (strip_tags($_POST["keepproportionsval"]) == "1"); 
 				$this->inputCropKeepProportions = (strip_tags($_POST["cropkeepproportionsval"]) == "1");
-				$this->inputCropKeepProportionsRatio = (float)strip_tags($_POST["cropkeepproportionsratio"]);
+        		$this->inputCropKeepProportionsRatioW = (float)strip_tags($_POST["cropkeepproportionsratiow"]);
+        		$this->inputCropKeepProportionsRatioH = (float)strip_tags($_POST["cropkeepproportionsratioh"]);
 				$this->inputGrayscale = (strip_tags($_POST["grayscaleval"]) == "1"); 
 				$this->inputBrightness = (int)strip_tags($_POST["brightness"]); 
 				$this->inputContrast = (int)strip_tags($_POST["contrast"]); 
@@ -155,6 +190,39 @@
 				$this->inputContrastLast = (int)strip_tags($_POST["contrastlast"]);
 
 				$this->Action(strip_tags($_POST["actiontype"]));
+			}
+		}
+		
+		function LoadLanguage()
+		{
+			$language = "";
+			
+			if (isset($_POST["language"]))
+			{
+				$this->inputLanguage = $_POST["language"]; 
+				$language = $this->inputLanguage;
+			}
+			else if (isset($_GET["language"]))
+			{
+				$this->inputLanguage = $_GET["language"]; 
+				$language = $this->inputLanguage;
+			}
+			else
+				$language = PIE_DEFAULT_LANGUAGE;
+				
+			$tryLanguage = plugin_dir_path(__FILE__)."../../../language/".$language.".ini";
+			if (file_exists($tryLanguage))
+				$this->texts = PIE_GetTexts(plugin_dir_path(__FILE__)."../../../language/".$language.".ini");
+			else
+				$this->texts = PIE_GetTexts(plugin_dir_path(__FILE__)."../../../language/".PIE_DEFAULT_LANGUAGE.".ini");
+		
+			//Load the texts that not exists in the current langugare from english.
+			$texts = PIE_GetTexts(plugin_dir_path(__FILE__)."../../../language/en-GB.ini");
+				
+			foreach ($texts as $key => $text)
+			{
+				if (array_key_exists($key, $this->texts) === false)
+					$this->texts[$key] = $text;
 			}
 		}
 		
@@ -485,7 +553,7 @@
 			if ($actionType == $this->actionSaveAndClose)
 			{
 				$this->SaveImage($this->resourceWorkWith, $this->srcEdit, $this->mimeType);
-
+				
 				$uploads = wp_upload_dir();
 				$upload_base = str_replace(site_url().'/', '', $uploads['baseurl']);
 				
@@ -549,34 +617,24 @@
 					$this->errorMessages[] = __('Couldn´t find image information. Maybe it´s been deleted during image editing?', 'php-image-editor-lite');
 					return;
 				}
-
+				
 				unlink($this->srcOriginal);
 				unlink($this->srcPng);
 				unlink($this->srcWorkWith);
-				
 				PIE_DeleteOldImages(PIE_IMAGE_ORIGINAL_PATH);
 				PIE_DeleteOldImages(PIE_IMAGE_PNG_PATH);
 				PIE_DeleteOldImages(PIE_IMAGE_WORK_WITH_PATH);
-				
-				PIE_Echo('<script language="javascript" type="text/javascript">');
-				PIE_Echo('jQuery(document).ready(function($) {');
-				PIE_Echo("if (window.parent.parent.location != window.parent.location) {");
-				PIE_Echo("$('#TB_window', window.parent.parent.document).width(670);");
-				PIE_Echo("$('#TB_window', window.parent.parent.document).height(659);");
-				PIE_Echo("$('#TB_window', window.parent.parent.document).css('margin-left', '-335px');");
-				PIE_Echo("$('#TB_iframeContent', window.parent.parent.document).width(670);");
-				PIE_Echo("$('#TB_iframeContent', window.parent.parent.document).height(629);");
-				PIE_Echo('}');
-				PIE_Echo('parent.tb_remove();');
-				PIE_Echo('parent.location.reload();');
-				PIE_Echo('});');
-				PIE_Echo('</script>');
+				$reloadParentBrowser = PIE_RELOAD_PARENT_BROWSER_ON_SAVE ? 'window.opener.location.reload();' : '';
+				PIE_Echo('<script language="javascript" type="text/javascript">'.$reloadParentBrowser.'window.open(\'\',\'_parent\',\'\');window.close();</script>');
 			}
 		}
 		
 		function ActionResize($width, $height, $image)
 		{
 			$newImage = @imagecreatetruecolor($width, $height);
+
+      PIE_KeepTranspacecyCopyResampled($newImage, $this->mimeType);
+			
 			imagecopyresampled($newImage, $image, 0, 0, 0, 0, $width, $height, $this->GetWidthFromImage($image), $this->GetHeightFromImage($image));
 			return $newImage;
 		}
@@ -587,8 +645,12 @@
 			$cropHeight = $this->GetHeight() - $cropTop - $cropBottom;
 			
 			$newImageCropped = @imagecreatetruecolor($cropWidth, $cropHeight);
-			imagecopy($newImageCropped, $this->resourceWorkWith, 0, 0, $cropLeft, $cropTop, $cropWidth, $cropHeight); 
-		
+
+      PIE_KeepTranspacecyCopyResampled($newImageCropped, $this->mimeType);
+			
+			//imagecopy($newImageCropped, $this->resourceWorkWith, 0, 0, $cropLeft, $cropTop, $cropWidth, $cropHeight); 
+      imagecopyresampled($newImageCropped, $this->resourceWorkWith, 0, 0, $cropLeft, $cropTop, $cropWidth, $cropHeight, $cropWidth, $cropHeight);
+			
 			$this->resourceWorkWith = $newImageCropped;
 		}
 		
@@ -632,10 +694,17 @@
 		
 		function ActionRotate($Degrees)
 		{
-			if (function_exists('imagerotate'))
-				$this->resourceWorkWith = imagerotate($this->resourceWorkWith, $Degrees, 0);
-			else
-				$this->resourceWorkWith = PIE_ImageRotate($this->resourceWorkWith, $Degrees);
+      if (function_exists('imagerotate'))
+        $this->resourceWorkWith = imagerotate($this->resourceWorkWith, $Degrees, 0);
+      else
+        $this->resourceWorkWith = PIE_ImageRotate($this->resourceWorkWith, $Degrees);
+
+      if ($this->mimeType == image_type_to_mime_type(IMAGETYPE_GIF) || $this->mimeType == image_type_to_mime_type(IMAGETYPE_PNG))
+      { 
+        //Keep transparecy
+        imagealphablending($this->resourceWorkWith, true); 
+        imagesavealpha($this->resourceWorkWith, true); 
+      }
 		} 
 		
 		function ActionGrayscale()
@@ -707,7 +776,10 @@
 			}
 			else if ($mimeType == image_type_to_mime_type(IMAGETYPE_PNG))
 			{
-				imagepng($image, $toSrc);		
+        //Keep transparecy.
+        imagesavealpha($image, true);
+			  
+			  imagepng($image, $toSrc);		
 			}
 		}
 		

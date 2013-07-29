@@ -1,5 +1,5 @@
 <?php
-    
+	
 	
 	    /*
 	    Copyright 2008, 2009, 2010, 2011 Patrik Hultgren
@@ -22,24 +22,28 @@
 	    You should have received a copy of the GNU General Public License
 	    along with PHP Image Editor Joomla. If not, see <http://www.gnu.org/licenses/>.
 	    */
-	
+
 	/**
 	* Protection
 	*
 	* This string of code will prevent hacks from accessing the file directly.
 	*/
 	defined('ABSPATH') or die("Cannot access pages directly.");
-
-	if (!defined("PIE_PHP_VERSION_MINIMUM"))
+	
+	function PIE_Access($user)
 	{
-		define("PIE_PHP_VERSION_MINIMUM", "5");
-		define("PIE_GD_VERSION_MINIMUM", "2.0.28");
-		define("PIE_IMAGE_ORIGINAL_PATH", "editimagesoriginal/");
-		define("PIE_IMAGE_WORK_WITH_PATH", "editimagesworkwith/");
-		define("PIE_IMAGE_PNG_PATH", "editimagespng/");
-		define("PIE_MENU_RESIZE", "0");
-		define("PIE_MENU_ROTATE", "1");
-		define("PIE_MENU_CROP", "2");
-		define("PIE_MENU_EFFECTS", "3");
-	}
+		global $mainframe;
+		
+		if ($mainframe)
+		{
+			//In Joomla 1.5, change this code if you wan´t to adjust which users who can edit images.
+			return ($user->usertype == 'Manager' || $user->usertype == 'Administrator' || $user->usertype == 'Super Administrator');
+		}
+		else
+		{
+			//In Joomla 1.6 and 1.7, change this code if you wan´t to adjust which users who can edit images.
+			//Group 8 = Super Users
+			return (JAccess::check($user->id, 'core.edit') || in_array(8, $user->groups));
+		}
+	}		
 ?>
