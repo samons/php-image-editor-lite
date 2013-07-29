@@ -5,7 +5,7 @@ Plugin URI: http://www.phpimageeditor.se/wordpress.php
 Description: Alternative image editing directly in WordPress.
 Author: Patrik Hultgren
 Author URI: http://www.phpimageeditor.se
-Version: 0.7
+Version: 4.0
 Stable tag: 0.7
 License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 */
