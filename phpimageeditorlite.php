@@ -27,7 +27,7 @@ License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2
 */
 defined('ABSPATH') or die("Cannot access pages directly.");
 
-define('PIE_VERSION', '0.5');
+define('PIE_VERSION', '4.0');
 define('PIE_USER_CAPABILITY', 'upload_files');
 
  function phpimageeditorlite_init(){
